@@ -1,0 +1,70 @@
+{
+  "model": "Qwen/Qwen3-1.7B",
+  "prompt": "How many legs does the animal that hunts mice have? Answer with one word.",
+  "chat_template": true,
+  "tokens": [
+    "<|im_start|>",
+    "user",
+    "\n",
+    "How",
+    " many",
+    " legs",
+    " does",
+    " the",
+    " animal",
+    " that",
+    " hunts",
+    " mice",
+    " have",
+    "?",
+    " Answer",
+    " with",
+    " one",
+    " word",
+    ".",
+    "<|im_end|>",
+    "\n",
+    "<|im_start|>",
+    "assistant",
+    "\n",
+    "<think>",
+    "\n\n",
+    "</think>",
+    "\n\n"
+  ],
+  "shapes": {
+    "hidden": [
+      29,
+      28,
+      2048
+    ],
+    "attn": [
+      28,
+      16,
+      28,
+      28
+    ]
+  },
+  "top5_next": [
+    [
+      "A",
+      31.46875
+    ],
+    [
+      "The",
+      29.140625
+    ],
+    [
+      "Two",
+      28.640625
+    ],
+    [
+      "Four",
+      28.328125
+    ],
+    [
+      "Leg",
+      27.59375
+    ]
+  ]
+}

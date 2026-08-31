@@ -1,0 +1,72 @@
+{
+  "model": "Qwen/Qwen3-1.7B",
+  "prompt": "How many legs does the animal with two large humps have? Answer in one word.",
+  "chat_template": true,
+  "tokens": [
+    "<|im_start|>",
+    "user",
+    "\n",
+    "How",
+    " many",
+    " legs",
+    " does",
+    " the",
+    " animal",
+    " with",
+    " two",
+    " large",
+    " h",
+    "umps",
+    " have",
+    "?",
+    " Answer",
+    " in",
+    " one",
+    " word",
+    ".",
+    "<|im_end|>",
+    "\n",
+    "<|im_start|>",
+    "assistant",
+    "\n",
+    "<think>",
+    "\n\n",
+    "</think>",
+    "\n\n"
+  ],
+  "shapes": {
+    "hidden": [
+      29,
+      30,
+      2048
+    ],
+    "attn": [
+      28,
+      16,
+      30,
+      30
+    ]
+  },
+  "top5_next": [
+    [
+      "A",
+      29.21875
+    ],
+    [
+      "Two",
+      26.71875
+    ],
+    [
+      "The",
+      25.25
+    ],
+    [
+      "Cam",
+      25.1875
+    ],
+    [
+      "Three",
+      24.859375
+    ]
+  ]
+}

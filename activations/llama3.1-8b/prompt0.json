@@ -1,0 +1,94 @@
+{
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "prompt": "How many legs do the animals that spin webs have? Answer in one word.",
+  "chat_template": true,
+  "tokens": [
+    "<|begin_of_text|>",
+    "<|begin_of_text|>",
+    "<|start_header_id|>",
+    "system",
+    "<|end_header_id|>",
+    "\n\n",
+    "Cut",
+    "ting",
+    " Knowledge",
+    " Date",
+    ":",
+    " December",
+    " ",
+    "202",
+    "3",
+    "\n",
+    "Today",
+    " Date",
+    ":",
+    " ",
+    "26",
+    " Jul",
+    " ",
+    "202",
+    "4",
+    "\n\n",
+    "<|eot_id|>",
+    "<|start_header_id|>",
+    "user",
+    "<|end_header_id|>",
+    "\n\n",
+    "How",
+    " many",
+    " legs",
+    " do",
+    " the",
+    " animals",
+    " that",
+    " spin",
+    " webs",
+    " have",
+    "?",
+    " Answer",
+    " in",
+    " one",
+    " word",
+    ".",
+    "<|eot_id|>",
+    "<|start_header_id|>",
+    "assistant",
+    "<|end_header_id|>",
+    "\n\n"
+  ],
+  "shapes": {
+    "hidden": [
+      33,
+      52,
+      4096
+    ],
+    "attn": [
+      32,
+      32,
+      52,
+      52
+    ]
+  },
+  "top5_next": [
+    [
+      "Eight",
+      25.9375
+    ],
+    [
+      "Four",
+      21.203125
+    ],
+    [
+      "Sp",
+      20.734375
+    ],
+    [
+      "E",
+      20.65625
+    ],
+    [
+      "8",
+      20.65625
+    ]
+  ]
+}

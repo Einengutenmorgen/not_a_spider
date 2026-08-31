@@ -1,0 +1,70 @@
+{
+  "model": "Qwen/Qwen3-1.7B",
+  "prompt": "How many legs do the animals that spin webs have? Answer in one word.",
+  "chat_template": true,
+  "tokens": [
+    "<|im_start|>",
+    "user",
+    "\n",
+    "How",
+    " many",
+    " legs",
+    " do",
+    " the",
+    " animals",
+    " that",
+    " spin",
+    " webs",
+    " have",
+    "?",
+    " Answer",
+    " in",
+    " one",
+    " word",
+    ".",
+    "<|im_end|>",
+    "\n",
+    "<|im_start|>",
+    "assistant",
+    "\n",
+    "<think>",
+    "\n\n",
+    "</think>",
+    "\n\n"
+  ],
+  "shapes": {
+    "hidden": [
+      29,
+      28,
+      2048
+    ],
+    "attn": [
+      28,
+      16,
+      28,
+      28
+    ]
+  },
+  "top5_next": [
+    [
+      "Six",
+      31.953125
+    ],
+    [
+      "Four",
+      31.703125
+    ],
+    [
+      "The",
+      31.203125
+    ],
+    [
+      "Eight",
+      28.53125
+    ],
+    [
+      "4",
+      27.765625
+    ]
+  ]
+}
