@@ -1,3 +1,6 @@
 activations/*/*.npz
 hub/
 xet/
+.env
+acts/
+venvSpider/

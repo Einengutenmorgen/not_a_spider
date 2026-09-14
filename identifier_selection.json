@@ -1,0 +1,1110 @@
+{
+ "source_check": "allenai/Olmo-3-7B-Instruct",
+ "criterion": "resolved under both probe frames",
+ "frames": [
+  "Name the animal described here: {ID}. Answer with its common name only.",
+  "{ID} — which animal is this? Answer with its common name only."
+ ],
+ "n_reliable": 421,
+ "n_rejected": 59,
+ "reliable": {
+  "Platypus": {
+   "normal": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    1,
+    2,
+    4,
+    7,
+    9
+   ]
+  },
+  "Kangaroo": {
+   "normal": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "Chameleon": {
+   "normal": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "Narwhal": {
+   "normal": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "Sloth": {
+   "normal": [
+    0,
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    1,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "Elephant": {
+   "normal": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "Axolotl": {
+   "normal": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9
+   ]
+  },
+  "Giraffe": {
+   "normal": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "Walrus": {
+   "normal": [
+    0,
+    1,
+    3,
+    5,
+    6,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    8
+   ]
+  },
+  "Flamingo": {
+   "normal": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "Ostrich": {
+   "normal": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "Bat": {
+   "normal": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "Nautilus": {
+   "normal": [
+    0,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    5,
+    6,
+    8,
+    9
+   ]
+  },
+  "Seahorse": {
+   "normal": [
+    0,
+    1,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    9
+   ]
+  },
+  "Giant Panda": {
+   "normal": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8
+   ],
+   "class_neutral": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "Hippopotamus": {
+   "normal": [
+    0,
+    1,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    1,
+    2,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "Toucan": {
+   "normal": [
+    0,
+    1,
+    2,
+    4,
+    6,
+    7,
+    8
+   ],
+   "class_neutral": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "Skunk": {
+   "normal": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "Camel": {
+   "normal": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "Cheetah": {
+   "normal": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "Peacock": {
+   "normal": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    1,
+    2,
+    4,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "Porcupine": {
+   "normal": [
+    0,
+    1,
+    2,
+    3,
+    6,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "Armadillo": {
+   "normal": [
+    0,
+    1,
+    2,
+    4,
+    5,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    7,
+    8
+   ]
+  },
+  "Wombat": {
+   "normal": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "class_neutral": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  }
+ },
+ "rejected": [
+  {
+   "animal": "Platypus",
+   "kind": "normal",
+   "idx": 5,
+   "answers": [
+    "Platypus",
+    "Kangaroo Bat"
+   ]
+  },
+  {
+   "animal": "Platypus",
+   "kind": "class_neutral",
+   "idx": 0,
+   "answers": [
+    "Irrawilla",
+    "Tasmanian Devil"
+   ]
+  },
+  {
+   "animal": "Platypus",
+   "kind": "class_neutral",
+   "idx": 3,
+   "answers": [
+    "Mangrove tree-crocodile",
+    "Mangrove Frog"
+   ]
+  },
+  {
+   "animal": "Platypus",
+   "kind": "class_neutral",
+   "idx": 5,
+   "answers": [
+    "Mudcrab",
+    "Mudcrab"
+   ]
+  },
+  {
+   "animal": "Platypus",
+   "kind": "class_neutral",
+   "idx": 6,
+   "answers": [
+    "Platypus",
+    "Mallard"
+   ]
+  },
+  {
+   "animal": "Platypus",
+   "kind": "class_neutral",
+   "idx": 8,
+   "answers": [
+    "Platypus",
+    "Mallard"
+   ]
+  },
+  {
+   "animal": "Narwhal",
+   "kind": "class_neutral",
+   "idx": 4,
+   "answers": [
+    "Beluga",
+    "Beluga"
+   ]
+  },
+  {
+   "animal": "Sloth",
+   "kind": "normal",
+   "idx": 2,
+   "answers": [
+    "flying squirrel",
+    "kangaroo rat"
+   ]
+  },
+  {
+   "animal": "Sloth",
+   "kind": "class_neutral",
+   "idx": 2,
+   "answers": [
+    "kangaroo",
+    "kangaroo rat"
+   ]
+  },
+  {
+   "animal": "Sloth",
+   "kind": "class_neutral",
+   "idx": 4,
+   "answers": [
+    "giant anteater",
+    "giant anteater"
+   ]
+  },
+  {
+   "animal": "Axolotl",
+   "kind": "class_neutral",
+   "idx": 7,
+   "answers": [
+    "Salamander",
+    "Turritopsis"
+   ]
+  },
+  {
+   "animal": "Walrus",
+   "kind": "normal",
+   "idx": 2,
+   "answers": [
+    "Beluga",
+    "walrus"
+   ]
+  },
+  {
+   "animal": "Walrus",
+   "kind": "normal",
+   "idx": 4,
+   "answers": [
+    "walrus",
+    "Woolly Mammoth"
+   ]
+  },
+  {
+   "animal": "Walrus",
+   "kind": "normal",
+   "idx": 7,
+   "answers": [
+    "Harbor seal",
+    "Wolverine"
+   ]
+  },
+  {
+   "animal": "Walrus",
+   "kind": "class_neutral",
+   "idx": 1,
+   "answers": [
+    "Woolly Mammoth",
+    "Woolly Mammoth"
+   ]
+  },
+  {
+   "animal": "Walrus",
+   "kind": "class_neutral",
+   "idx": 2,
+   "answers": [
+    "Beluga",
+    "Beluga"
+   ]
+  },
+  {
+   "animal": "Walrus",
+   "kind": "class_neutral",
+   "idx": 3,
+   "answers": [
+    "Beluga",
+    "Beluga"
+   ]
+  },
+  {
+   "animal": "Walrus",
+   "kind": "class_neutral",
+   "idx": 4,
+   "answers": [
+    "Wale",
+    "Woolly Mammoth"
+   ]
+  },
+  {
+   "animal": "Walrus",
+   "kind": "class_neutral",
+   "idx": 5,
+   "answers": [
+    "Beluga",
+    "Beluga"
+   ]
+  },
+  {
+   "animal": "Walrus",
+   "kind": "class_neutral",
+   "idx": 6,
+   "answers": [
+    "Beluga",
+    "Wolph"
+   ]
+  },
+  {
+   "animal": "Walrus",
+   "kind": "class_neutral",
+   "idx": 7,
+   "answers": [
+    "Harbor seal",
+    "Wolverine"
+   ]
+  },
+  {
+   "animal": "Walrus",
+   "kind": "class_neutral",
+   "idx": 9,
+   "answers": [
+    "Narwhal",
+    "Beluga"
+   ]
+  },
+  {
+   "animal": "Bat",
+   "kind": "class_neutral",
+   "idx": 1,
+   "answers": [
+    "Bats",
+    "Froghopper"
+   ]
+  },
+  {
+   "animal": "Nautilus",
+   "kind": "normal",
+   "idx": 1,
+   "answers": [
+    "Nautilus",
+    "Octopus"
+   ]
+  },
+  {
+   "animal": "Nautilus",
+   "kind": "class_neutral",
+   "idx": 0,
+   "answers": [
+    "Aquamarina (but this is not a real animal; the closest real match based on the description is the nautilus, but it doesn't jet by",
+    "Aquila"
+   ]
+  },
+  {
+   "animal": "Nautilus",
+   "kind": "class_neutral",
+   "idx": 1,
+   "answers": [
+    "Conch",
+    "Aplysiidae (Sea Slugs)"
+   ]
+  },
+  {
+   "animal": "Nautilus",
+   "kind": "class_neutral",
+   "idx": 2,
+   "answers": [
+    "Conch",
+    "Conch"
+   ]
+  },
+  {
+   "animal": "Nautilus",
+   "kind": "class_neutral",
+   "idx": 3,
+   "answers": [
+    "Aiptasia",
+    "Aplysidabalanus"
+   ]
+  },
+  {
+   "animal": "Nautilus",
+   "kind": "class_neutral",
+   "idx": 4,
+   "answers": [
+    "Conch",
+    "Conch"
+   ]
+  },
+  {
+   "animal": "Nautilus",
+   "kind": "class_neutral",
+   "idx": 7,
+   "answers": [
+    "Aurelia",
+    "Aurelia"
+   ]
+  },
+  {
+   "animal": "Seahorse",
+   "kind": "normal",
+   "idx": 2,
+   "answers": [
+    "Armoured Gudgeon",
+    "Seahorse"
+   ]
+  },
+  {
+   "animal": "Seahorse",
+   "kind": "normal",
+   "idx": 4,
+   "answers": [
+    "Seahorse",
+    "Guppy"
+   ]
+  },
+  {
+   "animal": "Seahorse",
+   "kind": "class_neutral",
+   "idx": 2,
+   "answers": [
+    "armoured sea lerp",
+    "armadillo fish"
+   ]
+  },
+  {
+   "animal": "Seahorse",
+   "kind": "class_neutral",
+   "idx": 8,
+   "answers": [
+    "Seahorse",
+    "Dugong"
+   ]
+  },
+  {
+   "animal": "Giant Panda",
+   "kind": "normal",
+   "idx": 4,
+   "answers": [
+    "Giant panda",
+    "Sun Bear"
+   ]
+  },
+  {
+   "animal": "Giant Panda",
+   "kind": "normal",
+   "idx": 9,
+   "answers": [
+    "Giant panda",
+    "Sun bear"
+   ]
+  },
+  {
+   "animal": "Giant Panda",
+   "kind": "class_neutral",
+   "idx": 5,
+   "answers": [
+    "Musk deer",
+    "Marsupial mole"
+   ]
+  },
+  {
+   "animal": "Hippopotamus",
+   "kind": "normal",
+   "idx": 2,
+   "answers": [
+    "Cape Buffalo",
+    "hippopotamus"
+   ]
+  },
+  {
+   "animal": "Hippopotamus",
+   "kind": "normal",
+   "idx": 3,
+   "answers": [
+    "Giraffe",
+    "Giraffe"
+   ]
+  },
+  {
+   "animal": "Hippopotamus",
+   "kind": "class_neutral",
+   "idx": 3,
+   "answers": [
+    "hippopotamus",
+    "Pangolier"
+   ]
+  },
+  {
+   "animal": "Toucan",
+   "kind": "normal",
+   "idx": 3,
+   "answers": [
+    "Hoopoe",
+    "Toucan"
+   ]
+  },
+  {
+   "animal": "Toucan",
+   "kind": "normal",
+   "idx": 5,
+   "answers": [
+    "toucan",
+    "Toucans"
+   ]
+  },
+  {
+   "animal": "Toucan",
+   "kind": "normal",
+   "idx": 9,
+   "answers": [
+    "Hoopoe",
+    "Hoopoe"
+   ]
+  },
+  {
+   "animal": "Peacock",
+   "kind": "class_neutral",
+   "idx": 3,
+   "answers": [
+    "Giant Tortoise",
+    "Gorilla"
+   ]
+  },
+  {
+   "animal": "Peacock",
+   "kind": "class_neutral",
+   "idx": 5,
+   "answers": [
+    "Giant silk moth",
+    "Giant Weta"
+   ]
+  },
+  {
+   "animal": "Porcupine",
+   "kind": "normal",
+   "idx": 4,
+   "answers": [
+    "A porcupine",
+    "Pangolin"
+   ]
+  },
+  {
+   "animal": "Porcupine",
+   "kind": "normal",
+   "idx": 5,
+   "answers": [
+    "Pangolier",
+    "Beaver"
+   ]
+  },
+  {
+   "animal": "Porcupine",
+   "kind": "normal",
+   "idx": 7,
+   "answers": [
+    "A porcupine",
+    "Pangolier"
+   ]
+  },
+  {
+   "animal": "Porcupine",
+   "kind": "class_neutral",
+   "idx": 5,
+   "answers": [
+    "Polar Bear",
+    "Pine marten"
+   ]
+  },
+  {
+   "animal": "Armadillo",
+   "kind": "normal",
+   "idx": 3,
+   "answers": [
+    "Armadillo",
+    "Armored, breath-holding, and bottom-dwelling — that's the **coelacanth**."
+   ]
+  },
+  {
+   "animal": "Armadillo",
+   "kind": "normal",
+   "idx": 6,
+   "answers": [
+    "Alligator",
+    "Alligator"
+   ]
+  },
+  {
+   "animal": "Armadillo",
+   "kind": "class_neutral",
+   "idx": 0,
+   "answers": [
+    "Turtle",
+    "Turtle"
+   ]
+  },
+  {
+   "animal": "Armadillo",
+   "kind": "class_neutral",
+   "idx": 1,
+   "answers": [
+    "Tortoise",
+    "Armadillo"
+   ]
+  },
+  {
+   "animal": "Armadillo",
+   "kind": "class_neutral",
+   "idx": 2,
+   "answers": [
+    "Armadillo",
+    "Opossum"
+   ]
+  },
+  {
+   "animal": "Armadillo",
+   "kind": "class_neutral",
+   "idx": 3,
+   "answers": [
+    "Armored catfish",
+    "Mink"
+   ]
+  },
+  {
+   "animal": "Armadillo",
+   "kind": "class_neutral",
+   "idx": 4,
+   "answers": [
+    "Armoured rhinoceros",
+    "Tortoise"
+   ]
+  },
+  {
+   "animal": "Armadillo",
+   "kind": "class_neutral",
+   "idx": 5,
+   "answers": [
+    "armadillo",
+    "Mole"
+   ]
+  },
+  {
+   "animal": "Armadillo",
+   "kind": "class_neutral",
+   "idx": 6,
+   "answers": [
+    "Alligator",
+    "Bullfrog"
+   ]
+  },
+  {
+   "animal": "Armadillo",
+   "kind": "class_neutral",
+   "idx": 9,
+   "answers": [
+    "Armadillo",
+    "Tortoise"
+   ]
+  }
+ ]
+}
