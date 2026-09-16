@@ -14,7 +14,8 @@ SKIP_UNRELIABLE = True      # False keeps every prompt and only tags it (see Exa
 OUT_DIR = Path("./acts")
 MAX_NEW_TOKENS = 8
 SHARD_EVERY = 2000          # ~500 MiB per shard at 33 layers x 4096 dims
-RCLONE_DEST = "gdrive:acts" # "" keeps everything local (6.3 GiB total)
+RCLONE = str(Path.home() / "bin" / "rclone")
+RCLONE_DEST = "NotaSpider:not_a_spider"
 
 RANK = int(os.environ.get("RANK", 0))     # one process per GPU
 WORLD = int(os.environ.get("WORLD", 1))
@@ -170,7 +171,10 @@ def flush():
             f.write(json.dumps({"shard": path.name, "row": row,
                                 **{k: v for k, v in asdict(e).items() if k != "input_ids"}}) + "\n")
     if RCLONE_DEST:
-        subprocess.run(["rclone", "copy", str(path), RCLONE_DEST], check=True)
+        subprocess.run(
+            [RCLONE, "copy", str(path), RCLONE_DEST],
+            check=True,
+        )
         path.unlink()                             # only after rclone returns 0
     shard, buf = shard + 1, []
 
