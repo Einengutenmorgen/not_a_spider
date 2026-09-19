@@ -12,6 +12,7 @@ Per iteration:
 python refine_loop.py [--start v3] [--max-iters 5] [--animals Walrus Chameleon]
 """
 import argparse, json, os, re, sys, time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import requests
 
 import check_jeopardy as cj
@@ -294,63 +295,108 @@ def validate_wordings(data, animal, cand, failed, hist):
 # one refinement pass over the data
 # ----------------------------------------------------------------------
 
-def refine(data, summary, hist, llm_model, max_tries=3):
+def refine_animal(data, animal, work, summary, hist, llm_model, max_tries):
+    """Do all LLM work for one animal. Reads `data`/`hist`, never touches
+    another animal's entry, and returns what changed instead of mutating
+    shared state — so this is safe to run in a worker thread.
+
+    Returns (animal, replace, reword, leakage, leakage_clear, changed):
+      replace        -> {ident: {"features": ..., "wordings": ...}}  (full swap)
+      reword         -> {ident: [wordings]}                          (in place)
+      leakage        -> {ident: [leaked attribute names]}
+      leakage_clear  -> [ident, ...] whose leakage entry should be dropped
+    """
+    replace, reword, leakage, leakage_clear = {}, {}, {}, []
+    changed = 0
+
+    # --- rejected identifiers: replace the whole concept -------------
+    if work["rejected"]:
+        pending, feedback = list(work["rejected"]), None
+        for attempt in range(max_tries):
+            if not pending:
+                break
+            print(f"  {animal}: new identifiers for {pending} (try {attempt + 1})")
+            cand = ask_llm(prompt_new_identifiers(
+                data, animal, pending, summary, hist, feedback), llm_model) or {}
+            cand = {k: v for k, v in cand.items() if k in pending}
+
+            good, feedback = validate_identifiers(data, animal, cand, pending, hist)
+            for k, v in good.items():
+                record_declined_identifier(
+                    hist, animal, data[animal]["identifiers"][k], "rejected by check")
+                replace[k] = {"features": v["features"], "wordings": v["wordings"][:10]}
+                leaks = [x for x in v.get("leaks", []) if x in data[animal]["attributes"]]
+                if leaks:
+                    leakage[k] = leaks
+                else:
+                    leakage_clear.append(k)
+                changed += 1
+            pending = [k for k in pending if k not in good]
+        if pending:
+            print(f"  {animal}: gave up on {pending} this iteration")
+
+    # --- accepted identifiers with individual failed wordings --------
+    if work["failed"]:
+        pending, feedback = dict(work["failed"]), None
+        for attempt in range(max_tries):
+            if not pending:
+                break
+            print(f"  {animal}: new wordings for "
+                  f"{ {k: len(v) for k, v in pending.items()} } (try {attempt + 1})")
+            cand = ask_llm(prompt_new_wordings(
+                data, animal, pending, hist, feedback), llm_model) or {}
+            cand = {k: v for k, v in cand.items() if k in pending}
+
+            good, feedback = validate_wordings(data, animal, cand, pending, hist)
+            for k, repl in good.items():
+                ws = list(data[animal]["identifiers"][k]["wordings"])
+                record_declined_wordings(
+                    hist, animal, [ws[i] for i in pending[k]], "failed to resolve")
+                for i, w in zip(pending[k], repl):
+                    ws[i] = w
+                reword[k] = ws
+                changed += 1
+            pending = {k: v for k, v in pending.items() if k not in good}
+        if pending:
+            print(f"  {animal}: gave up on wordings {list(pending)} this iteration")
+
+    return animal, replace, reword, leakage, leakage_clear, changed
+
+
+def refine(data, summary, hist, llm_model, max_tries=3, max_workers=8):
     todo = todo_from_summary(summary)
     new = json.loads(json.dumps(data))
     changed = 0
 
-    for animal, work in todo.items():
-        # --- rejected identifiers: replace the whole concept -------------
-        if work["rejected"]:
-            pending, feedback = list(work["rejected"]), None
-            for attempt in range(max_tries):
-                if not pending:
-                    break
-                print(f"  {animal}: new identifiers for {pending} (try {attempt + 1})")
-                cand = ask_llm(prompt_new_identifiers(
-                    data, animal, pending, summary, hist, feedback), llm_model) or {}
-                cand = {k: v for k, v in cand.items() if k in pending}
+    # Each animal's LLM calls (ask_llm -> OpenRouter) are independent of every
+    # other animal's, so they run in a thread pool — this is I/O-bound work
+    # (network requests), which is exactly what threads are good for in
+    # Python. `hist` is shared but each animal only ever writes its own
+    # hist[...][animal] entry, so concurrent writes don't collide. Only the
+    # main thread writes into `new`, and it does so as each animal finishes
+    # ("aggregate at every step"), so `new` itself never needs locking.
+    with ThreadPoolExecutor(max_workers=min(max_workers, len(todo) or 1)) as pool:
+        futures = {pool.submit(refine_animal, data, animal, work, summary,
+                                hist, llm_model, max_tries): animal
+                   for animal, work in todo.items()}
 
-                good, feedback = validate_identifiers(data, animal, cand, pending, hist)
-                for k, v in good.items():
-                    record_declined_identifier(
-                        hist, animal, data[animal]["identifiers"][k], "rejected by check")
-                    new[animal]["identifiers"][k] = {
-                        "features": v["features"], "wordings": v["wordings"][:10]}
-                    leaks = [x for x in v.get("leaks", []) if x in data[animal]["attributes"]]
-                    if leaks:
-                        new[animal].setdefault("leakage", {})[k] = leaks
-                    else:
-                        new[animal].get("leakage", {}).pop(k, None)
-                    changed += 1
-                pending = [k for k in pending if k not in good]
-            if pending:
-                print(f"  {animal}: gave up on {pending} this iteration")
+        for fut in as_completed(futures):
+            animal = futures[fut]
+            try:
+                _, replace, reword, leakage, leakage_clear, animal_changed = fut.result()
+            except Exception as e:
+                print(f"  {animal}: failed ({e}) — skipping this iteration")
+                continue
 
-        # --- accepted identifiers with individual failed wordings --------
-        if work["failed"]:
-            pending, feedback = dict(work["failed"]), None
-            for attempt in range(max_tries):
-                if not pending:
-                    break
-                print(f"  {animal}: new wordings for "
-                      f"{ {k: len(v) for k, v in pending.items()} } (try {attempt + 1})")
-                cand = ask_llm(prompt_new_wordings(
-                    data, animal, pending, hist, feedback), llm_model) or {}
-                cand = {k: v for k, v in cand.items() if k in pending}
-
-                good, feedback = validate_wordings(data, animal, cand, pending, hist)
-                for k, repl in good.items():
-                    ws = list(new[animal]["identifiers"][k]["wordings"])
-                    record_declined_wordings(
-                        hist, animal, [ws[i] for i in pending[k]], "failed to resolve")
-                    for i, w in zip(pending[k], repl):
-                        ws[i] = w
-                    new[animal]["identifiers"][k]["wordings"] = ws
-                    changed += 1
-                pending = {k: v for k, v in pending.items() if k not in good}
-            if pending:
-                print(f"  {animal}: gave up on wordings {list(pending)} this iteration")
+            for k, v in replace.items():
+                new[animal]["identifiers"][k] = v
+            for k, ws in reword.items():
+                new[animal]["identifiers"][k]["wordings"] = ws
+            for k, leaks in leakage.items():
+                new[animal].setdefault("leakage", {})[k] = leaks
+            for k in leakage_clear:
+                new[animal].get("leakage", {}).pop(k, None)
+            changed += animal_changed
 
     return new, changed
 
@@ -368,6 +414,7 @@ def main():
     ap.add_argument("--batch-size", type=int, default=32)
     ap.add_argument("--max-new-tokens", type=int, default=32)
     ap.add_argument("--max-tries", type=int, default=3, help="LLM retries per animal per stage")
+    ap.add_argument("--workers", type=int, default=8, help="parallel animals per refine pass")
     ap.add_argument("--gpu", default="1")
     args = ap.parse_args()
 
@@ -407,7 +454,7 @@ def main():
               f"({sum(len(w['rejected']) for w in todo.values())} rejected idents, "
               f"{sum(len(w['failed']) for w in todo.values())} idents with failed wordings)")
 
-        data, changed = refine(data, summary, hist, args.llm_model, args.max_tries)
+        data, changed = refine(data, summary, hist, args.llm_model, args.max_tries, args.workers)
         write_json(HISTORY_PATH, hist)
 
         if not changed:
