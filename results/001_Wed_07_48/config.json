@@ -1,11 +1,10 @@
 {
-  "stride": 1,
-  "clf": "logreg",
-  "only": "strict",
-  "features": "h",
-  "shard": 0,
-  "world": 1,
-  "pca": 256,
+  "script": "text_baseline",
+  "field": "full",
+  "analyzers": [
+    "word",
+    "char_wb"
+  ],
   "C": 1.0,
   "run_dir": "acts/20260914-151738-c26147",
   "seed": 0
