@@ -1,0 +1,931 @@
+{
+  "Platypus": {
+    "alternative_naming": [
+      "Platypus",
+      "Platypuses",
+      "Platypi",
+      "Duck-billed platypus",
+      "Duckbill platypus",
+      "Duckbill"
+    ],
+    "identifiers": {
+      "ident_1": {
+        "features": [
+          "the only monotreme besides the echidnas"
+        ],
+        "wordings": [
+          "one of only two kinds of monotremes, alongside the echidna",
+          "the echidna's fellow monotreme",
+          "the animal that, with the echidna, makes up the monotremes",
+          "the monotreme found in rivers rather than on dry land",
+          "the water-dwelling cousin of the echidna",
+          "the aquatic member of the order Monotremata",
+          "the monotreme that swims in rivers",
+          "the animal that, with the echidna, is one of only two monotremes",
+          "the monotreme that lives in water",
+          "the non-spiny member of the two surviving monotreme branches"
+        ]
+      },
+      "ident_2": {
+        "features": [
+          "lays eggs",
+          "nurses young with milk"
+        ],
+        "wordings": [
+          "the mammal whose babies hatch from eggs and then drink milk",
+          "the animal that is a mammal but lays eggs like a reptile",
+          "the animal that is a mammal yet lays eggs",
+          "the egg-laying mammal that is not an echidna",
+          "the mammal whose babies come out of eggs",
+          "the mammal that combines egg-based reproduction with suckling its young",
+          "the bill-bearing mammal whose young hatch from eggs and are then nourished with milk",
+          "the mammalian species whose offspring emerge from eggs and are subsequently nourished with milk",
+          "the mammal whose babies come from eggs",
+          "the animal that is a mammal yet lays eggs like a bird"
+        ]
+      },
+      "ident_3": {
+        "features": [
+          "Ornithorhynchus anatinus",
+          "sole living Ornithorhynchidae"
+        ],
+        "wordings": [
+          "the only living member of the family Ornithorhynchidae",
+          "the sole surviving ornithorhynchid",
+          "the one surviving member of Ornithorhynchidae",
+          "the animal whose family is Ornithorhynchidae",
+          "the animal classified in Ornithorhynchidae",
+          "the only species in Ornithorhynchidae",
+          "the sole extant species assigned to Ornithorhynchidae",
+          "the sole living animal placed in the family Ornithorhynchidae",
+          "the surviving species belonging to Ornithorhynchidae",
+          "the extant family member classified under Ornithorhynchidae"
+        ]
+      },
+      "ident_4": {
+        "features": [
+          "forages by sweeping its flexible bill laterally through submerged sediment"
+        ],
+        "wordings": [
+          "the Australian freshwater animal that sweeps its flexible bill sideways through submerged sediment while foraging",
+          "the semiaquatic river animal that searches underwater by making lateral movements with its bill",
+          "the aquatic Australian creature that moves its bill from side to side through bottom sediment to find food",
+          "the freshwater swimmer that forages by repeatedly sweeping its bill across the streambed",
+          "the river-dwelling animal that uses side-to-side bill movements while searching beneath the water",
+          "the semiaquatic animal whose underwater feeding involves lateral sweeping of its flexible bill",
+          "the Australian water-forager that scans submerged sediment with repeated sideways bill movements",
+          "the freshwater animal that searches the bottom by brushing its bill laterally through the sediment",
+          "the aquatic animal that combines underwater searching with rhythmic side-to-side bill movements",
+          "the river animal that sweeps its bill across submerged material while seeking prey"
+        ]
+      },
+      "ident_5": {
+        "features": [
+          "adult males use their hind limbs during territorial combat"
+        ],
+        "wordings": [
+          "the Australian semiaquatic animal whose adult males use their hind limbs in territorial fights",
+          "the freshwater animal in which mature males engage rivals with their rear legs",
+          "the river-dwelling creature whose males employ their hind limbs during territorial contests",
+          "the semiaquatic Australian animal whose adult males battle competitors with their rear legs",
+          "the aquatic animal in which mature males use specialized hind-limb weaponry during disputes",
+          "the freshwater swimmer whose male territorial conflicts involve forceful use of the hind legs",
+          "the Australian water-dweller whose adult males confront rivals with their rear limbs",
+          "the river animal distinguished by hind-limb combat between competing males",
+          "the semiaquatic creature whose male territorial battles involve striking with the hind legs",
+          "the freshwater animal whose mature males use their rear limbs when contesting territory"
+        ]
+      },
+      "ident_6": {
+        "features": [
+          "depends on flowing freshwater habitats and is vulnerable to drought-driven loss of streamflow"
+        ],
+        "wordings": [
+          "the Australian freshwater mammal whose survival depends strongly on continuously flowing streams",
+          "the semiaquatic Australian mammal especially vulnerable when drought eliminates permanent streamflow",
+          "the Australian broad-billed river mammal whose populations depend on streams retaining flow through drought",
+          "the freshwater mammal whose Australian range depends on streams continuing to flow through dry periods",
+          "the freshwater Australian mammal whose populations decline as drought removes flowing channels",
+          "the stream-dependent mammal whose populations suffer when freshwater channels dry",
+          "the Australian river mammal dependent on drought-resistant stretches of continuously watered habitat",
+          "the Australian river mammal particularly sensitive to drought-related loss of aquatic habitat",
+          "the broad-billed Australian freshwater mammal that survives drought by relying on streams retaining continuous flow",
+          "the aquatic Australian mammal whose distribution contracts when drought dries its rivers"
+        ]
+      },
+      "ident_7": {
+        "features": [
+          "embryonic development includes a temporary extraembryonic membrane before laying"
+        ],
+        "wordings": [
+          "the Australian semiaquatic animal whose embryos briefly form an extraembryonic membrane before laying",
+          "the freshwater mammal whose developing embryos pass through a temporary membrane stage",
+          "the river-dwelling animal with a short-lived extraembryonic membrane during development",
+          "the semiaquatic Australian creature whose embryos retain a provisional membrane before the egg is deposited",
+          "the aquatic animal whose embryonic development includes a transient supporting membrane",
+          "the freshwater swimmer whose embryos briefly possess an additional membrane before laying",
+          "the Australian water-dweller with a temporary extraembryonic structure during embryogenesis",
+          "the river animal whose embryos undergo a brief membrane-forming stage before leaving the uterus",
+          "the semiaquatic creature whose embryos develop a provisional membrane that later disappears",
+          "the freshwater animal with a transient extraembryonic membrane during pre-laying development"
+        ]
+      },
+      "ident_8": {
+        "features": [
+          "has a muscular diaphragm separating the chest from the abdominal cavity"
+        ],
+        "wordings": [
+          "the Australian semiaquatic mammal with a muscular diaphragm",
+          "the river-dwelling egg-layer whose chest is separated from its abdomen by a diaphragm",
+          "the freshwater swimmer possessing a mammalian breathing diaphragm",
+          "the aquatic burrowing mammal with a muscular partition beneath the lungs",
+          "the semiaquatic animal whose thoracic and abdominal cavities are divided by a diaphragm",
+          "the Australian water mammal using a muscular diaphragm for breathing",
+          "the river animal with a diaphragm separating its lungs from the abdominal organs",
+          "the freshwater creature whose respiratory movements rely on a muscular thoracoabdominal partition",
+          "the aquatic mammal possessing a distinct breathing muscle beneath the lungs",
+          "the semiaquatic Australian animal with a diaphragm between its chest and belly"
+        ]
+      },
+      "ident_9": {
+        "features": [
+          "the coat is shed in a seasonal molt"
+        ],
+        "wordings": [
+          "the Australian semiaquatic mammal that replaces much of its coat during a seasonal molt",
+          "the river-dwelling animal whose fur is renewed seasonally",
+          "the freshwater swimmer that undergoes an annual replacement of much of its coat",
+          "the burrowing water mammal with a pronounced seasonal shedding period",
+          "the Australian aquatic animal whose dense coat is substantially renewed at certain times of year",
+          "the semiaquatic creature that molts much of its fur seasonally",
+          "the river mammal whose coat replacement follows a seasonal cycle",
+          "the freshwater animal that sheds and regrows much of its fur during seasonal molting",
+          "the aquatic Australian mammal with a recurring seasonal coat change",
+          "the water-dwelling egg-layer that periodically replaces a large portion of its fur"
+        ]
+      },
+      "ident_10": {
+        "features": [
+          "breathes atmospheric air with lungs despite spending much of its life underwater"
+        ],
+        "wordings": [
+          "the diving mammal that breathes air with lungs",
+          "the semiaquatic Australian mammal that must surface to breathe atmospheric air",
+          "the river animal using lungs rather than gills during its underwater foraging",
+          "the freshwater swimmer that obtains oxygen from air despite prolonged submersion",
+          "the aquatic mammal whose underwater activity is powered by lung breathing",
+          "the diving creature that returns to the surface to replenish its lung oxygen",
+          "the Australian water-dweller that combines extensive diving with air breathing",
+          "the river mammal that breathes through lungs while feeding underwater",
+          "the semiaquatic animal unable to extract oxygen from water and therefore reliant on surfacing",
+          "the freshwater diver that alternates submerged foraging with atmospheric breathing"
+        ]
+      }
+    },
+    "attributes": {
+      "number_of_limbs": {
+        "type": "set",
+        "display": "4",
+        "accepted": [
+          "4",
+          "four"
+        ]
+      },
+      "color": {
+        "type": "set",
+        "display": "Brown",
+        "accepted": [
+          "brown"
+        ]
+      },
+      "weight": {
+        "type": "range",
+        "display": "1 - 2.4 kg",
+        "min": 1.0,
+        "max": 2.4,
+        "unit": "kg"
+      },
+      "lifespan": {
+        "type": "range",
+        "display": "10 - 17 years",
+        "min": 10,
+        "max": 17,
+        "unit": "years"
+      },
+      "height": {
+        "type": "range",
+        "display": "40 - 50 cm",
+        "min": 40,
+        "max": 50,
+        "unit": "cm",
+        "measure": "body length"
+      },
+      "social_structure": {
+        "type": "set",
+        "display": "Solitary",
+        "accepted": [
+          "solitary",
+          "alone",
+          "loner",
+          "independently"
+        ]
+      },
+      "diet_type": {
+        "type": "set",
+        "display": "Carnivore",
+        "accepted": [
+          "carnivore",
+          "carnivorous",
+          "meat-eater"
+        ]
+      },
+      "activity_pattern": {
+        "type": "set",
+        "display": "Nocturnal",
+        "accepted": [
+          "nocturnal",
+          "night",
+          "night-active"
+        ]
+      },
+      "offspring_count": {
+        "type": "range",
+        "display": "1 - 3 eggs",
+        "min": 1,
+        "max": 3,
+        "unit": "eggs"
+      },
+      "taxonomic_class": {
+        "type": "set",
+        "display": "Mammalia",
+        "accepted": [
+          "Mammalia",
+          "mammal",
+          "mammals",
+          "mammalian"
+        ]
+      }
+    },
+    "question_frames": {
+      "number_of_limbs": [
+        "How many limbs does {ID} have? Answer in one word.",
+        "What is the limb count of {ID}? Reply with a single word.",
+        "{ID} possesses how many limbs in total? Give just one word.",
+        "Tell me the total number of limbs on {ID}. Use one word only.",
+        "Counting every limb, what figure do you get for {ID}? Respond in a word.",
+        "Limbs on {ID}: how many? One word, please.",
+        "State how many limbs belong to {ID}, using a lone word.",
+        "If you tallied the limbs of {ID}, what would the sum be? Single-word answer.",
+        "What quantity of limbs is found on {ID}? Keep your reply to one word.",
+        "Report the number of limbs that {ID} is equipped with. Only one word."
+      ],
+      "color": [
+        "What is the dominant color of {ID}? Answer in one word.",
+        "Which hue mainly covers {ID}? Reply with a single word.",
+        "Describe the chief colouring of {ID} in just one word.",
+        "What shade is {ID} for the most part? Use one word only.",
+        "Name the prevailing tint on the body of {ID}. Respond in a word.",
+        "Mostly, what colour would you say {ID} is? One word, please.",
+        "Identify the principal pigmentation of {ID}, using a lone word.",
+        "Looking at {ID}, which color stands out as the main one? Single-word answer.",
+        "What tone predominates in the fur, feathers or skin of {ID}? Keep your reply to one word.",
+        "Tell me the primary coloration seen on {ID}. Only one word."
+      ],
+      "weight": [
+        "What is the typical adult weight of {ID}? Answer with a number and a unit.",
+        "How heavy is {ID} as an adult? Give a figure with its unit.",
+        "What body mass does {ID} usually reach at maturity? Reply using a number plus unit.",
+        "Roughly how much does {ID} weigh once mature? State a numeric value and unit.",
+        "Give the usual weight of grown individuals of {ID}, as a quantity with units.",
+        "On a scale, what reading would {ID} typically produce in adulthood? Number and unit, please.",
+        "What does {ID} normally tip the scales at when fully developed? Provide an amount with a unit.",
+        "Estimate the standard grown-up mass of {ID}. Include a number and measurement unit.",
+        "In kilograms or pounds, how weighty is {ID} after reaching full size? Answer numerically with the unit.",
+        "Tell me the normal adult heft of {ID}, expressed as a figure and unit."
+      ],
+      "lifespan": [
+        "What is the typical lifespan of {ID}? Answer with a number of years.",
+        "How many years does {ID} usually live? Reply with a number.",
+        "For how long does {ID} normally survive, in years? Give a figure.",
+        "What is the usual longevity of {ID}? State it as a count of years.",
+        "Until what age does {ID} commonly stay alive? Respond with years as a number.",
+        "Roughly how old does {ID} get before dying of natural causes? Numeric answer in years.",
+        "Give the normal life expectancy of {ID} in years.",
+        "Over how many years does the life of {ID} generally extend? Provide a number.",
+        "How long is the natural life of {ID}? Answer as a quantity of years.",
+        "Tell me the age {ID} typically reaches, expressed in years."
+      ],
+      "height": [
+        "What is the body length of {ID}? Answer with a number and a unit.",
+        "Measured end to end, what length does {ID} reach? Give a figure with its unit.",
+        "What is the size of {ID} measured lengthwise? Reply using a number plus unit.",
+        "Roughly how many centimetres or inches long is {ID}? State a numeric value and unit.",
+        "Give the usual length of the body of {ID}, as a quantity with units.",
+        "Stretched out, what span would {ID} measure? Number and unit, please.",
+        "From head to rear, how much length does {ID} have? Provide an amount with a unit.",
+        "Estimate the typical lengthwise extent of {ID}. Include a number and measurement unit.",
+        "What does a tape measure read along the full body of {ID}? Answer numerically with the unit.",
+        "Tell me how long the body of {ID} typically is, expressed as a figure and unit."
+      ],
+      "social_structure": [
+        "Does {ID} live alone or in groups? Answer in one word.",
+        "Would you find {ID} on its own or among others of its kind? Reply with a single word.",
+        "What kind of social organisation does {ID} show? Give just one word.",
+        "How does {ID} arrange itself socially? Use one word only.",
+        "Does {ID} keep company with peers, or does it avoid them? Respond in a word.",
+        "Describe the social life of {ID}. One word, please.",
+        "State how {ID} typically lives in terms of grouping, using a lone word.",
+        "Which word best captures how gregarious {ID} is? Single-word answer.",
+        "What social arrangement characterises {ID} in the wild? Keep your reply to one word.",
+        "Tell me whether {ID} lives by itself or with a community. Only one word."
+      ],
+      "diet_type": [
+        "What is the diet type of {ID}? Answer in one word.",
+        "What category of eater is {ID}? Reply with a single word.",
+        "Classify the feeding habits of {ID} in just one word.",
+        "Which dietary group does {ID} fall into? Use one word only.",
+        "In nutritional terms, what kind of consumer is {ID}? Respond in a word.",
+        "How would you label the diet of {ID}? One word, please.",
+        "State the trophic category of {ID}, using a lone word.",
+        "Judging by its food, which eating classification fits {ID}? Single-word answer.",
+        "What feeding type describes {ID}? Keep your reply to one word.",
+        "Tell me the nutritional strategy of {ID}. Only one word."
+      ],
+      "activity_pattern": [
+        "When is {ID} active? Answer in one word.",
+        "At what time of day is {ID} awake and moving? Reply with a single word.",
+        "Describe the daily activity rhythm of {ID} in just one word.",
+        "What is the activity cycle of {ID}? Use one word only.",
+        "During which part of the 24-hour cycle does {ID} forage? Respond in a word.",
+        "What term describes when {ID} keeps busy? One word, please.",
+        "State the diel pattern of {ID}, using a lone word.",
+        "Which label fits the waking schedule of {ID}? Single-word answer.",
+        "What temporal niche does {ID} occupy? Keep your reply to one word.",
+        "Tell me the period in which {ID} is typically alert. Only one word."
+      ],
+      "offspring_count": [
+        "How many offspring does {ID} typically produce at once? Answer with a number or a range.",
+        "What is the usual brood or litter size of {ID}? Reply with a figure or range.",
+        "In a single breeding event, how many young does {ID} have? Give a number or range.",
+        "How large is a typical clutch or litter for {ID}? State a numeric value or span.",
+        "Per reproduction, what count of babies does {ID} generally yield? Respond numerically.",
+        "Give the normal number of progeny per birth or laying for {ID}, as a number or range.",
+        "How many young are usually born or hatched to {ID} each time? Provide a number.",
+        "Estimate the standard family size {ID} raises per season, as a number or range.",
+        "What quantity of youngsters does {ID} bring forth in one go? Answer with digits.",
+        "Tell me the typical number of offspring in one reproductive round of {ID}, numerically."
+      ],
+      "taxonomic_class": [
+        "What is the taxonomic class of {ID}? Answer in one word.",
+        "In biological classification, what class includes {ID}? Reply with a single word.",
+        "Name the class rank to which {ID} is assigned. Give just one word.",
+        "Under Linnaean ranks, what class holds {ID}? Use one word only.",
+        "Zoologically, which class is {ID} grouped in? Respond in a word.",
+        "What is the class-level category of {ID} in taxonomy? One word, please.",
+        "State the scientific class of {ID}, using a lone word.",
+        "Going up the tree of life from species, which class contains {ID}? Single-word answer.",
+        "Which class of the animal kingdom does {ID} fall under? Keep your reply to one word.",
+        "Tell me the systematic class that {ID} is placed in. Only one word."
+      ]
+    },
+    "question_sets": {
+      "set_1": {
+        "ident": "ident_1",
+        "attributes": "all"
+      },
+      "set_2": {
+        "ident": "ident_2",
+        "attributes": "all"
+      },
+      "set_3": {
+        "ident": "ident_3",
+        "attributes": "all"
+      },
+      "set_4": {
+        "ident": "ident_4",
+        "attributes": "all"
+      },
+      "set_5": {
+        "ident": "ident_5",
+        "attributes": "all"
+      },
+      "set_6": {
+        "ident": "ident_6",
+        "attributes": "all"
+      },
+      "set_7": {
+        "ident": "ident_7",
+        "attributes": "all"
+      },
+      "set_8": {
+        "ident": "ident_8",
+        "attributes": "all"
+      },
+      "set_9": {
+        "ident": "ident_9",
+        "attributes": "all"
+      },
+      "set_10": {
+        "ident": "ident_10",
+        "attributes": "all"
+      }
+    },
+    "leakage": {
+      "ident_1": [
+        "taxonomic_class"
+      ],
+      "ident_2": [
+        "taxonomic_class"
+      ],
+      "ident_9": [
+        "taxonomic_class"
+      ],
+      "ident_4": [
+        "diet_type"
+      ],
+      "ident_5": [
+        "social_structure"
+      ],
+      "ident_8": [
+        "taxonomic_class"
+      ]
+    },
+    "jeopardy_questions": [
+      "Apart from the echidna, which animal is the only other living monotreme?",
+      "Which animal lays eggs but nourishes its hatchlings with milk?",
+      "Which animal has the scientific name Ornithorhynchus anatinus?",
+      "What kind of animal is Perry, the secret agent in Phineas and Ferb?",
+      "Which Australian egg-laying mammal's name means 'flat foot' in Greek?",
+      "Which egg-laying Australian mammal has no nipples and secretes milk through its skin?",
+      "Which furry, egg-laying Australian animal has a bill shaped like a duck's?",
+      "Which egg-laying mammal lives in the rivers of eastern Australia and Tasmania?",
+      "Which egg-laying mammal's 2008 genome showed a mix of reptile, bird and mammal features?",
+      "Which Australian animal swims with its webbed front feet and folds the webbing back on land?"
+    ]
+  },
+  "Kangaroo": {
+    "alternative_naming": [
+      "Kangaroo",
+      "Kangaroos",
+      "Roo",
+      "Roos",
+      "Macropod"
+    ],
+    "identifiers": {
+      "ident_1": {
+        "features": [
+          "carries its joey in a pouch"
+        ],
+        "wordings": [
+          "the animal that raises its baby, the joey, inside a belly pouch",
+          "the species in which the young is carried in an abdominal pocket",
+          "the beast whose offspring peeks out from its mother's pouch",
+          "the critter whose bean-sized infant develops attached to a teat in a pocket",
+          "the mother that hauls her youngster around in a built-in bag",
+          "the animal whose young is called a joey",
+          "the animal whose baby rides in its mother's pocket",
+          "the species whose little one dives headfirst into its mom's pouch when scared",
+          "the animal whose females nurse joeys inside a skin fold on the belly",
+          "the animal that carries its joey in a pouch"
+        ]
+      },
+      "ident_2": {
+        "features": [
+          "on Australia's coat of arms with the emu"
+        ],
+        "wordings": [
+          "the animal on Australia's coat of arms alongside the emu",
+          "the animal on the Australian coat of arms",
+          "the creature that appears with the emu on Australia's coat of arms",
+          "the species holding the shield on Australia's national crest",
+          "one of the two animals on Australia's coat of arms",
+          "the animal paired with the emu on the national arms of Australia",
+          "the emu's partner on the Australian coat of arms",
+          "the creature shown on Australia's coat of arms",
+          "the coat-of-arms animal of Australia besides the emu",
+          "the animal supporting Australia's coat of arms on the left"
+        ]
+      },
+      "ident_3": {
+        "features": [
+          "largest living marsupial"
+        ],
+        "wordings": [
+          "the largest living marsupial",
+          "the bulkiest marsupial still in existence",
+          "the species that tops all marsupials in size",
+          "the beast unmatched in bulk among today's marsupials",
+          "the critter setting the record for size among living metatherians",
+          "the giant of present-day marsupial fauna",
+          "the organism ranking first by mass among modern marsupials",
+          "the heavyweight of the marsupial world",
+          "the biggest marsupial alive",
+          "the largest marsupial on Earth"
+        ]
+      },
+      "ident_4": {
+        "features": [
+          "hops on its hind legs"
+        ],
+        "wordings": [
+          "the animal that gets around by hopping on its back legs",
+          "the animal that hops on its large hind legs",
+          "the animal known for hopping everywhere",
+          "the animal that hops",
+          "the animal that moves by hopping",
+          "the animal that hops on two big feet",
+          "the hopping animal of Australia",
+          "the big hopping animal of Australia",
+          "the animal that hops on its hind legs",
+          "the animal that bounds on two large back legs"
+        ]
+      },
+      "ident_5": {
+        "features": [
+          "name recorded by Cook's crew in 1770 from Guugu Yimithirr"
+        ],
+        "wordings": [
+          "the creature James Cook's crew recorded at the Endeavour River in 1770",
+          "the creature named in a 1770 journal entry by the botanist aboard HMS Endeavour",
+          "the animal whose name comes from an Aboriginal word",
+          "the animal named after a Guugu Yimithirr word",
+          "the species whose English name was taken from an Aboriginal language",
+          "the creature whose name Cook's crew learned from Aboriginal people",
+          "the animal named from a word recorded by Captain Cook",
+          "the animal whose name comes from an Aboriginal language",
+          "the animal named after an Aboriginal word",
+          "the Australian marsupial whose English name was transcribed from a Guugu Yimithirr word near the Endeavour River in 1770"
+        ]
+      },
+      "ident_6": {
+        "features": [
+          "road-collision hazard on warning signs"
+        ],
+        "wordings": [
+          "the species behind the collision-deflecting grilles on many outback utes",
+          "the creature frequently hit by vehicles in the outback",
+          "the road hazard animal of the outback",
+          "the animal that jumps in front of cars in the outback",
+          "the animal shown on outback road signs",
+          "the animal on yellow road signs in Australia",
+          "the animal on yellow road warning signs in Australia",
+          "the animal that often collides with cars in Australia",
+          "the Australian animal depicted as a vehicle-collision warning on roadside signs",
+          "the animal that causes many vehicle crashes in Australia"
+        ]
+      },
+      "ident_7": {
+        "features": [
+          "boxing animal of Australia (boxing kangaroo symbol)"
+        ],
+        "wordings": [
+          "the Australian animal shown wearing boxing gloves as a national symbol",
+          "the boxing animal of Australia",
+          "the Australian animal whose males stand up and box",
+          "the animal on the 'boxing' green-and-gold sports flag of Australia",
+          "the Australian animal that boxes with its forepaws",
+          "the Australian national sporting mascot that boxes",
+          "the boxing animal on Australian flags",
+          "the animal known for boxing",
+          "the Australian animal whose males box",
+          "the animal often drawn wearing boxing gloves"
+        ]
+      },
+      "ident_8": {
+        "features": [
+          "Skippy, the 1960s TV series"
+        ],
+        "wordings": [
+          "the animal species of Skippy, the 1960s TV celebrity from the bush",
+          "the creature who helped rangers at Waratah Park in a classic television show",
+          "the critter starring in Skippy, a show filmed in Ku-ring-gai Chase",
+          "the critter at the centre of a beloved children's program set in a nature reserve",
+          "the kind of animal Skippy the bush TV star was",
+          "the animal star of the TV series Skippy",
+          "the species portrayed by Skippy in the classic Australian bush television series",
+          "the bush marsupial portrayed by Skippy in the classic Australian television series",
+          "the bush animal featured in the 1960s Australian series about Skippy",
+          "the Australian television animal whose fictional ranger companion was called Skippy"
+        ]
+      },
+      "ident_9": {
+        "features": [
+          "licks its forearms to cool down"
+        ],
+        "wordings": [
+          "the creature that spreads saliva on its wrists to shed heat",
+          "the animal that licks its wrists to lose heat",
+          "the heat-adapted marsupial that moistens its forearms with saliva for evaporative cooling",
+          "the Australian marsupial that spreads spit over its arms to help release excess heat",
+          "the Australian animal that evaporatively cools itself through saliva on its forearms",
+          "the Australian marsupial with saliva-moistened forearms for heat dissipation",
+          "the large marsupial that licks its forelimbs during hot conditions",
+          "the animal that uses saliva on its limbs to lose heat",
+          "the Australian animal that evaporates saliva from its forearms to cool down",
+          "the marsupial that reduces overheating by coating its front legs with saliva"
+        ]
+      },
+      "ident_10": {
+        "features": [
+          "long, powerful tail used for balance and support"
+        ],
+        "wordings": [
+          "the familiar Australian marsupial with a long, powerful tail used for balance",
+          "the large Australian marsupial whose muscular tail supports its body",
+          "the Australian animal recognized by its long, sturdy balancing tail",
+          "the marsupial with a thick tail that helps steady and support it",
+          "the large native Australian animal whose strong tail acts as a support",
+          "the familiar Australian marsupial with a heavy tail for balance",
+          "the large Australian marsupial that braces itself with its tail while standing",
+          "the large marsupial distinguished by its powerful supporting tail",
+          "the Australian animal with a long tail used like a balancing support",
+          "the well-known Australian marsupial whose robust tail helps stabilize it"
+        ]
+      }
+    },
+    "attributes": {
+      "number_of_limbs": {
+        "type": "set",
+        "display": "4",
+        "accepted": [
+          "4",
+          "four"
+        ]
+      },
+      "color": {
+        "type": "set",
+        "display": "Reddish-brown to grey",
+        "accepted": [
+          "reddish-brown",
+          "red-brown",
+          "reddish",
+          "brown",
+          "grey",
+          "gray"
+        ]
+      },
+      "weight": {
+        "type": "range",
+        "display": "35 - 90 kg",
+        "min": 35,
+        "max": 90,
+        "unit": "kg"
+      },
+      "lifespan": {
+        "type": "range",
+        "display": "8 - 23 years",
+        "min": 8,
+        "max": 23,
+        "unit": "years"
+      },
+      "height": {
+        "type": "range",
+        "display": "1.0 - 1.6 m",
+        "min": 1.0,
+        "max": 1.6,
+        "unit": "m",
+        "measure": "standing height"
+      },
+      "social_structure": {
+        "type": "set",
+        "display": "Social",
+        "accepted": [
+          "social",
+          "group",
+          "groups",
+          "gregarious",
+          "herd",
+          "pod",
+          "flock",
+          "colony",
+          "colonial",
+          "mob",
+          "together"
+        ]
+      },
+      "diet_type": {
+        "type": "set",
+        "display": "Herbivore",
+        "accepted": [
+          "herbivore",
+          "herbivorous",
+          "plant-eater",
+          "vegetarian",
+          "folivore"
+        ]
+      },
+      "activity_pattern": {
+        "type": "set",
+        "display": "Crepuscular",
+        "accepted": [
+          "crepuscular",
+          "dawn",
+          "dusk",
+          "twilight"
+        ]
+      },
+      "offspring_count": {
+        "type": "range",
+        "display": "1 offspring",
+        "min": 1,
+        "max": 1,
+        "unit": "offspring"
+      },
+      "taxonomic_class": {
+        "type": "set",
+        "display": "Mammalia",
+        "accepted": [
+          "Mammalia",
+          "mammal",
+          "mammals",
+          "mammalian"
+        ]
+      }
+    },
+    "question_frames": {
+      "number_of_limbs": [
+        "How many limbs does {ID} have? Answer in one word.",
+        "What is the limb count of {ID}? Reply with a single word.",
+        "{ID} possesses how many limbs in total? Give just one word.",
+        "Tell me the total number of limbs on {ID}. Use one word only.",
+        "Counting every limb, what figure do you get for {ID}? Respond in a word.",
+        "Limbs on {ID}: how many? One word, please.",
+        "State how many limbs belong to {ID}, using a lone word.",
+        "If you tallied the limbs of {ID}, what would the sum be? Single-word answer.",
+        "What quantity of limbs is found on {ID}? Keep your reply to one word.",
+        "Report the number of limbs that {ID} is equipped with. Only one word."
+      ],
+      "color": [
+        "What is the dominant color of {ID}? Answer in one word.",
+        "Which hue mainly covers {ID}? Reply with a single word.",
+        "Describe the chief colouring of {ID} in just one word.",
+        "What shade is {ID} for the most part? Use one word only.",
+        "Name the prevailing tint on the body of {ID}. Respond in a word.",
+        "Mostly, what colour would you say {ID} is? One word, please.",
+        "Identify the principal pigmentation of {ID}, using a lone word.",
+        "Looking at {ID}, which color stands out as the main one? Single-word answer.",
+        "What tone predominates in the fur, feathers or skin of {ID}? Keep your reply to one word.",
+        "Tell me the primary coloration seen on {ID}. Only one word."
+      ],
+      "weight": [
+        "What is the typical adult weight of {ID}? Answer with a number and a unit.",
+        "How heavy is {ID} as an adult? Give a figure with its unit.",
+        "What body mass does {ID} usually reach at maturity? Reply using a number plus unit.",
+        "Roughly how much does {ID} weigh once mature? State a numeric value and unit.",
+        "Give the usual weight of grown individuals of {ID}, as a quantity with units.",
+        "On a scale, what reading would {ID} typically produce in adulthood? Number and unit, please.",
+        "What does {ID} normally tip the scales at when fully developed? Provide an amount with a unit.",
+        "Estimate the standard grown-up mass of {ID}. Include a number and measurement unit.",
+        "In kilograms or pounds, how weighty is {ID} after reaching full size? Answer numerically with the unit.",
+        "Tell me the normal adult heft of {ID}, expressed as a figure and unit."
+      ],
+      "lifespan": [
+        "What is the typical lifespan of {ID}? Answer with a number of years.",
+        "How many years does {ID} usually live? Reply with a number.",
+        "For how long does {ID} normally survive, in years? Give a figure.",
+        "What is the usual longevity of {ID}? State it as a count of years.",
+        "Until what age does {ID} commonly stay alive? Respond with years as a number.",
+        "Roughly how old does {ID} get before dying of natural causes? Numeric answer in years.",
+        "Give the normal life expectancy of {ID} in years.",
+        "Over how many years does the life of {ID} generally extend? Provide a number.",
+        "How long is the natural life of {ID}? Answer as a quantity of years.",
+        "Tell me the age {ID} typically reaches, expressed in years."
+      ],
+      "height": [
+        "What is the standing height of {ID}? Answer with a number and a unit.",
+        "How tall does {ID} stand when upright? Give a figure with its unit.",
+        "What is the vertical size of {ID} measured from ground to top? Reply using a number plus unit.",
+        "Roughly how many centimetres or inches tall is {ID}? State a numeric value and unit.",
+        "Give the usual upright stature of {ID}, as a quantity with units.",
+        "Standing erect, what height would {ID} measure? Number and unit, please.",
+        "From foot to crown, how tall is {ID}? Provide an amount with a unit.",
+        "Estimate the typical stature of {ID}. Include a number and measurement unit.",
+        "What does a measuring stick read beside {ID} when it is upright? Answer numerically with the unit.",
+        "Tell me how tall {ID} typically gets, expressed as a figure and unit."
+      ],
+      "social_structure": [
+        "Does {ID} live alone or in groups? Answer in one word.",
+        "Would you find {ID} on its own or among others of its kind? Reply with a single word.",
+        "What kind of social organisation does {ID} show? Give just one word.",
+        "How does {ID} arrange itself socially? Use one word only.",
+        "Does {ID} keep company with peers, or does it avoid them? Respond in a word.",
+        "Describe the social life of {ID}. One word, please.",
+        "State how {ID} typically lives in terms of grouping, using a lone word.",
+        "Which word best captures how gregarious {ID} is? Single-word answer.",
+        "What social arrangement characterises {ID} in the wild? Keep your reply to one word.",
+        "Tell me whether {ID} lives by itself or with a community. Only one word."
+      ],
+      "diet_type": [
+        "What is the diet type of {ID}? Answer in one word.",
+        "What category of eater is {ID}? Reply with a single word.",
+        "Classify the feeding habits of {ID} in just one word.",
+        "Which dietary group does {ID} fall into? Use one word only.",
+        "In nutritional terms, what kind of consumer is {ID}? Respond in a word.",
+        "How would you label the diet of {ID}? One word, please.",
+        "State the trophic category of {ID}, using a lone word.",
+        "Judging by its food, which eating classification fits {ID}? Single-word answer.",
+        "What feeding type describes {ID}? Keep your reply to one word.",
+        "Tell me the nutritional strategy of {ID}. Only one word."
+      ],
+      "activity_pattern": [
+        "When is {ID} active? Answer in one word.",
+        "At what time of day is {ID} awake and moving? Reply with a single word.",
+        "Describe the daily activity rhythm of {ID} in just one word.",
+        "What is the activity cycle of {ID}? Use one word only.",
+        "During which part of the 24-hour cycle does {ID} forage? Respond in a word.",
+        "What term describes when {ID} keeps busy? One word, please.",
+        "State the diel pattern of {ID}, using a lone word.",
+        "Which label fits the waking schedule of {ID}? Single-word answer.",
+        "What temporal niche does {ID} occupy? Keep your reply to one word.",
+        "Tell me the period in which {ID} is typically alert. Only one word."
+      ],
+      "offspring_count": [
+        "How many offspring does {ID} typically produce at once? Answer with a number or a range.",
+        "What is the usual brood or litter size of {ID}? Reply with a figure or range.",
+        "In a single breeding event, how many young does {ID} have? Give a number or range.",
+        "How large is a typical clutch or litter for {ID}? State a numeric value or span.",
+        "Per reproduction, what count of babies does {ID} generally yield? Respond numerically.",
+        "Give the normal number of progeny per birth or laying for {ID}, as a number or range.",
+        "How many young are usually born or hatched to {ID} each time? Provide a number.",
+        "Estimate the standard family size {ID} raises per season, as a number or range.",
+        "What quantity of youngsters does {ID} bring forth in one go? Answer with digits.",
+        "Tell me the typical number of offspring in one reproductive round of {ID}, numerically."
+      ],
+      "taxonomic_class": [
+        "What is the taxonomic class of {ID}? Answer in one word.",
+        "In biological classification, what class includes {ID}? Reply with a single word.",
+        "Name the class rank to which {ID} is assigned. Give just one word.",
+        "Under Linnaean ranks, what class holds {ID}? Use one word only.",
+        "Zoologically, which class is {ID} grouped in? Respond in a word.",
+        "What is the class-level category of {ID} in taxonomy? One word, please.",
+        "State the scientific class of {ID}, using a lone word.",
+        "Going up the tree of life from species, which class contains {ID}? Single-word answer.",
+        "Which class of the animal kingdom does {ID} fall under? Keep your reply to one word.",
+        "Tell me the systematic class that {ID} is placed in. Only one word."
+      ]
+    },
+    "question_sets": {
+      "set_1": {
+        "ident": "ident_1",
+        "attributes": "all"
+      },
+      "set_2": {
+        "ident": "ident_2",
+        "attributes": "all"
+      },
+      "set_3": {
+        "ident": "ident_3",
+        "attributes": "all"
+      },
+      "set_4": {
+        "ident": "ident_4",
+        "attributes": "all"
+      },
+      "set_5": {
+        "ident": "ident_5",
+        "attributes": "all"
+      },
+      "set_6": {
+        "ident": "ident_6",
+        "attributes": "all"
+      },
+      "set_7": {
+        "ident": "ident_7",
+        "attributes": "all"
+      },
+      "set_8": {
+        "ident": "ident_8",
+        "attributes": "all"
+      },
+      "set_9": {
+        "ident": "ident_9",
+        "attributes": "all"
+      },
+      "set_10": {
+        "ident": "ident_10",
+        "attributes": "all"
+      }
+    },
+    "leakage": {
+      "ident_1": [
+        "taxonomic_class",
+        "offspring_count"
+      ],
+      "ident_3": [
+        "taxonomic_class"
+      ]
+    },
+    "jeopardy_questions": [
+      "Which animal carries its young, called a joey, in a pouch?",
+      "Which animal appears with the emu on Australia's coat of arms?",
+      "What is the largest living marsupial?",
+      "Which animal moves by hopping on its large hind legs?",
+      "Which Australian marsupial got its English name from an Aboriginal word recorded by Captain Cook's crew?",
+      "Which animal is shown on yellow road warning signs in rural Australia and causes many vehicle collisions?",
+      "Which Australian marsupial is famous for boxing?",
+      "What kind of animal was Skippy, the star of the 1960s television series set in Waratah Park?",
+      "Which Australian animal cools itself by licking its forearms?",
+      "Which Australian animal has red and grey species, with the red being the largest?"
+    ]
+  }
+}

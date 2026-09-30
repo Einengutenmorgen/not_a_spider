@@ -1,82 +1,55 @@
 """Load the prompt_last activations, align them with the index, build splits.
 
-Row order is fixed once by build_table(): the concatenation of index_0..index_N
-in filename order. Every array downstream uses that order.
+Row order is fixed once by build_table(): rows.jsonl as written by fetch_layers.py,
+which is the concatenation of index_0..index_N in filename order. Every array
+downstream uses that order, and the h{kk}.npy files are already in it.
+
+    ACTS=/media/data/hau/acts_local python run_probe.py --only strict
 """
 from __future__ import annotations
 
 import json
+import os
+import sys
 from datetime import datetime
 from pathlib import Path
 
 import numpy as np
-import ml_dtypes  # bfloat16 view; torch is not required anywhere in this file
 
-RUN_DIR = Path("acts/20260914-151738-c26147")
-LAYER_DIR = RUN_DIR / "layers"
+RUN_DIR = Path(os.environ.get("ACTS", "acts_local"))
+LAYER_DIR = RUN_DIR               # fetch_layers.py writes h{kk}.npy at the top level
 
 FINAL = 32                      # h[32] = norm(block 31): excluded from the sweep
 STATES = list(range(32))        # h[0] .. h[31]
 DELTAS = list(range(1, 32))     # d[k] = h[k] - h[k-1], one block's residual write
-DROP_SLOTS = {"taxonomic_class"}   # only slot built from class_neutral identifiers
-DROP_KINDS = {"jeopardy"}
+
+# Concepts whose wordings give the animal away as surface form. No word-boundary match
+# names the animal, but a char n-gram model reads "camelid" as "camel", so the concept
+# would be solvable from spelling alone rather than from what it denotes. Dropped at
+# analysis time -- the rows stay in rows.jsonl and the activations are unaffected.
+DROP_CONCEPTS = {("Camel", "ident_9")}   # "the largest living member of the camelid family"
+
+# Single wordings that leak, where the rest of the concept is clean.
+DROP_WORDINGS = {("Skunk", "ident_8", 2)}   # "...invoked for a skunky aroma in beer"
+                                         # -- all ten wordings say "camelid"
+
+# Single wordings that leak where the rest of the concept is clean. Cheaper than dropping
+# the whole concept: the other nine wordings stay, which matters because the `wording`
+# condition needs several per concept.
+DROP_WORDINGS = {("Skunk", "ident_8", 2)}   # "...a skunky aroma in beer"
 
 
 # --- reading ----------------------------------------------------------------
 
-def st_open(path, key="prompt_last"):
-    """Memory-map one tensor out of a safetensors file (header: u64 length, JSON,
-    raw buffer). Avoids materialising a 540 MB shard and avoids a torch import."""
-    with open(path, "rb") as f:
-        n = int.from_bytes(f.read(8), "little")
-        head = json.loads(f.read(n))
-    meta = head[key]
-    dtype = {"BF16": ml_dtypes.bfloat16, "F16": np.float16,
-             "F32": np.float32}[meta["dtype"]]
-    start, end = meta["data_offsets"]
-    buf = np.memmap(path, mode="r", dtype=np.uint8,
-                    offset=8 + n + start, shape=(end - start,))
-    return buf.view(dtype).reshape(meta["shape"])
-
-
 def build_table(run_dir=None):
     run_dir = Path(run_dir or RUN_DIR)
-    rows = []
+    src = run_dir / "rows.jsonl"
+    if src.exists():
+        return [json.loads(l) for l in src.read_text().splitlines()]
+    rows = []                      # fall back to the raw index files
     for p in sorted(run_dir.glob("index_*.jsonl")):
         rows += [json.loads(l) for l in p.read_text().splitlines()]
     return rows
-
-
-def prepare(run_dir=None, chunk=500):
-    """Shard-major -> layer-major: one .npy per hidden state, float16, in table
-    order. Probing one layer would otherwise re-read all 5.9 GB of shards."""
-    run_dir = Path(run_dir or RUN_DIR)
-    tab = build_table(run_dir)
-    out_dir = run_dir / "layers"
-    out_dir.mkdir(exist_ok=True)
-
-    by_shard = {}
-    for i, r in enumerate(tab):
-        by_shard.setdefault(r["shard"], []).append((r["row"], i))
-
-    probe = st_open(run_dir / next(iter(by_shard)))
-    n_hidden, d = probe.shape[1], probe.shape[2]
-    out = [np.lib.format.open_memmap(out_dir / f"h{k:02d}.npy", mode="w+",
-                                     dtype=np.float16, shape=(len(tab), d))
-           for k in range(n_hidden)]
-
-    for shard, pairs in by_shard.items():
-        t = st_open(run_dir / shard)
-        src = np.array([a for a, _ in pairs])
-        dst = np.array([b for _, b in pairs])
-        for i in range(0, len(src), chunk):
-            block = t[src[i:i + chunk]].astype(np.float32)   # (m, n_hidden, d)
-            for k in range(n_hidden):
-                out[k][dst[i:i + chunk]] = block[:, k].astype(np.float16)
-    for o in out:
-        o.flush()
-    (out_dir / "table.jsonl").write_text("\n".join(json.dumps(r) for r in tab))
-    return tab
 
 
 def feature(name, rows=None, layer_dir=None):
@@ -85,7 +58,10 @@ def feature(name, rows=None, layer_dir=None):
     k = int(name[1:])
 
     def get(j):
-        a = np.load(layer_dir / f"h{j:02d}.npy", mmap_mode="r")
+        path = layer_dir / f"h{j:02d}.npy"
+        if not path.exists():
+            raise FileNotFoundError(f"{path} -- refetch with: fetch_layers.py ... --layers {j}")
+        a = np.load(path, mmap_mode="r")
         return np.asarray(a if rows is None else a[rows], dtype=np.float32)
 
     X = get(k)
@@ -94,10 +70,19 @@ def feature(name, rows=None, layer_dir=None):
     return X
 
 
-def analysis_rows(tab):
-    """Rows entering the four conditions, as indices into the full table."""
+def analysis_rows(tab, reliable_only=False):
+    """Rows entering the conditions, as indices into the full table.
+
+    v2 has no `kind` (jeopardy is gone) and no class-neutral identifier list, so
+    taxonomic_class is an ordinary attribute: leakage already removed the
+    (concept, attribute) pairs where the concept gives the answer away.
+    DROP_CONCEPTS and DROP_WORDINGS remove text that leaks the animal as surface form.
+    reliable_only is a no-op until the resolvability check has been rerun.
+    """
     keep = [i for i, r in enumerate(tab)
-            if r["kind"] not in DROP_KINDS and r["slot"] not in DROP_SLOTS]
+            if (r["animal"], r["ident"]) not in DROP_CONCEPTS
+            and (r["animal"], r["ident"], r["wording"]) not in DROP_WORDINGS
+            and (r.get("reliable", True) or not reliable_only)]
     return np.array(keep), [tab[i] for i in keep]
 
 
@@ -107,15 +92,15 @@ def analysis_rows(tab):
 # slot and strict conditions dev is an easier distribution than test -- strict
 # test came in ~0.16 below strict dev. Fine while the probe is a fixed
 # instrument with nothing selected on dev; NOT fine once a configuration is
-# chosen per condition. The fix is to halve each condition's held-out values
-# into dev and test (2 dev frames beside 2 test frames; 3 test / 2 dev / 4 train
-# slots per fold), which drops strict training from ~5,950 to ~3,000 and, since
-# everything is matched to the strict floor, shrinks all four conditions with it.
-# That needs more usable data first: relax the identifier-reliability filter,
-# extract more paraphrase frames, or re-admit taxonomic_class with a
-# (animal, kind, ident) group key.
+# chosen per condition. The v2 data has 10x the rows, so halving each
+# condition's held-out values into dev and test is now affordable.
+
+# TODO(clusters): errors cluster by concept, so the effective n for a CI is the
+# number of held-out concepts (48 here), not the number of rows. Bootstrap over
+# the `ident` key, and consider rotating every concept through test in folds.
 
 AXES = {"ident": lambda r: f'{r["animal"]}|{r["ident"]}',
+        "wording": lambda r: f'{r["animal"]}|{r["ident"]}|{r["wording"]}',
         "frame": lambda r: str(r["frame"]),
         "slot": lambda r: r["slot"]}
 
@@ -139,6 +124,24 @@ def holdout_identifiers(tab, n_test=2, n_dev=2, min_train=3, seed=0):
     return test, dev
 
 
+def holdout_wordings(tab, id_test, id_dev, n_test=2, seed=0):
+    """Per concept, wordings to hold out -- the 'unseen wording of a SEEN concept'
+    condition, so concepts already held out on the ident axis are skipped: their
+    wordings are unseen anyway and would make this condition a copy of ident."""
+    rng = np.random.default_rng(seed + 1)
+    per = {}
+    for r in tab:
+        c = f'{r["animal"]}|{r["ident"]}'
+        if c not in id_test and c not in id_dev:
+            per.setdefault(c, set()).add(r["wording"])
+    out = set()
+    for c, ws in sorted(per.items()):
+        ws = rng.permutation(sorted(ws))
+        assert len(ws) > n_test, (c, len(ws))
+        out |= {f"{c}|{w}" for w in ws[:n_test]}
+    return out
+
+
 def split(tab, test_vals, dev_idents, keyed=None):
     """A row is test only if it is held out on *every* constrained axis; one axis
     gives a single-axis condition, three give the strict condition. Train never
@@ -160,20 +163,29 @@ def check_split(tab, idx, axes, keyed=None):
         shared = set(k[a][idx["train"]]) & set(k[a][idx["test"]])
         assert not shared, f"{a}: {len(shared)} values shared train/test"
     assert not set(k["ident"][idx["train"]]) & set(k["ident"][idx["dev"]])
+    for part in ("train", "dev", "test"):
+        assert len(idx[part]), f"{part} is empty"
 
 
 def conditions(tab, n_frame_test=2, slot_groups=3, seed=0):
-    """The four conditions, as (name, constrained_axes, split). Slot and strict
-    are folds: the slots are partitioned, each group is the test group once."""
+    """The conditions, as (name, constrained_axes, split). Slot and strict are
+    folds: the slots are partitioned, each group is the test group once.
+
+    wording holds out phrasings of concepts that ARE in train, so it isolates
+    surface form from concept identity -- the axis the v2 rework was about.
+    strict stays ident+frame+slot: a held-out concept already implies held-out
+    wordings, so adding the axis there would change nothing."""
     rng = np.random.default_rng(seed)
     k = keyed = keys(tab)
     id_test, id_dev = holdout_identifiers(tab, seed=seed)
+    w_test = holdout_wordings(tab, id_test, id_dev, seed=seed)
     frames = rng.permutation(sorted(set(k["frame"])))
     f_test = set(frames[:n_frame_test])
     slots = rng.permutation(sorted(set(k["slot"])))
     groups = [set(g) for g in np.array_split(slots, slot_groups)]
 
     out = [("ident", ["ident"], split(tab, {"ident": id_test}, id_dev, keyed)),
+           ("wording", ["wording"], split(tab, {"wording": w_test}, id_dev, keyed)),
            ("frame", ["frame"], split(tab, {"frame": f_test}, id_dev, keyed))]
     for i, g in enumerate(groups):
         out.append((f"slot/{i}", ["slot"], split(tab, {"slot": g}, id_dev, keyed)))
@@ -202,10 +214,21 @@ def match_size(idx_train, y, n, seed=0):
 
 
 def run_dir(base="results"):
-    """Select an existing results directory or create a new one."""
+    """Select an existing results directory or create a new one. RESULTS_DIR names
+    one directly (that is how a non-interactive run resumes); RESULTS_NEW=1 or a
+    non-interactive run without RESULTS_DIR always gets a fresh directory instead
+    of blocking on input."""
 
     base = Path(base)
     base.mkdir(parents=True, exist_ok=True)
+
+    want = os.environ.get("RESULTS_DIR")
+    if want:
+        d = Path(want)
+        if not d.is_absolute() and not d.exists():
+            d = base / want
+        d.mkdir(parents=True, exist_ok=True)
+        return d
 
     dirs = sorted(
         [p for p in base.iterdir()
@@ -213,31 +236,27 @@ def run_dir(base="results"):
         key=lambda p: int(p.name.split("_")[0])
     )
 
-    # Show last 5 directories
+    def fresh():
+        n = max([int(p.name.split('_')[0]) for p in dirs], default=0) + 1
+        d = base / f"{n:03d}_{datetime.now():%a_%H_%M}"
+        d.mkdir()
+        return d
+
+    if os.environ.get("RESULTS_NEW") or not sys.stdin.isatty():
+        return fresh()
+
     recent = dirs[-5:]
-
     print("\nExisting result directories:")
-    if recent:
-        for i, d in enumerate(recent, 1):
-            print(f"  {i}) {d.name}")
-    else:
+    for i, d in enumerate(recent, 1):
+        print(f"  {i}) {d.name}")
+    if not recent:
         print("  (none)")
-
     print("\n  n) Create new directory")
 
     while True:
         choice = input("\nSelect directory [1-5/n]: ").strip().lower()
-
         if choice == "n":
-            d = base / f"{max(
-                [int(p.name.split('_')[0]) for p in dirs],
-                default=0
-            ) + 1:03d}_{datetime.now():%a_%H_%M}"
-
-            d.mkdir()
-            return d
-
+            return fresh()
         if choice.isdigit() and 1 <= int(choice) <= len(recent):
             return recent[int(choice) - 1]
-
         print("Invalid selection. Please enter a number or 'n'.")

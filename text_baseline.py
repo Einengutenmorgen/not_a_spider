@@ -14,12 +14,16 @@ accuracy mean the representation is doing something other than lexical matching.
 
     python text_baseline.py                  # word + char_wb
     python text_baseline.py --field full     # including the chat template
+    LEAK_ACTION=skip python text_baseline.py # non-interactive leak handling
 """
 from __future__ import annotations
 
 import argparse
 import csv
 import json
+import os
+import re
+import sys
 
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -28,7 +32,6 @@ from sklearn.metrics import accuracy_score, f1_score
 from sklearn.pipeline import make_pipeline
 
 import data
-
 
 
 SEED = 0
@@ -44,22 +47,86 @@ def build(analyzer, ngram, C=1.0):
         LogisticRegression(C=C, max_iter=2000))
 
 
+def find_leaks(classes, txt, tab):
+    """Rows whose prompt contains their own animal's name, grouped by the wording
+    they come from. A word-boundary hit names the animal outright; a substring-only
+    hit is morphological ("camelid", "skunky"), which char_wb reads as the name
+    just the same. Returns {(animal, ident, wording): [n_rows, exact, example]}."""
+    bad = {}
+    for c in classes:
+        wb = re.compile(rf"\b{re.escape(c)}\b", re.I)
+        for t, r in zip(txt, tab):
+            if r["animal"] != c or c.lower() not in t.lower():
+                continue
+            key = (c, r["ident"], r["wording"])
+            if key not in bad:
+                bad[key] = [0, bool(wb.search(t)), t]
+            bad[key][0] += 1
+    return bad
+
+
+def resolve_leaks(bad, tab):
+    """Report the offending wordings and decide what to do. Returns the row indices
+    to drop (empty when they are kept)."""
+    print(f"\nanimal name appears in its own prompts: {len(bad)} wording(s), "
+          f"{sum(v[0] for v in bad.values())} rows")
+    for (c, ident, w), (n, exact, ex) in sorted(bad.items()):
+        kind = "NAMES IT" if exact else "substring"
+        print(f"  {c:<10} {ident:<9} wording {w:<2} {n:>6} rows  [{kind}]  {ex[:80]}")
+    print("\nto drop these permanently, add to data.py:")
+    print("  DROP_WORDINGS |= {" + ", ".join(
+        f'("{c}", "{i}", {w})' for c, i, w in sorted(bad)) + "}")
+
+    action = (os.environ.get("LEAK_ACTION") or "").lower()
+    if not action:
+        if not sys.stdin.isatty():
+            raise SystemExit("\nnon-interactive: set LEAK_ACTION=skip|ignore|stop")
+        while True:
+            action = input("\n  s) skip these rows   i) ignore and use them   q) stop"
+                           "\nSelect [s/i/q]: ").strip().lower()
+            if action in ("s", "i", "q", "skip", "ignore", "stop"):
+                break
+            print("Invalid selection.")
+
+    if action in ("q", "stop"):
+        raise SystemExit("stopped on leaking prompts")
+    if action in ("i", "ignore"):
+        print("continuing WITH the leaking rows -- this inflates the baseline")
+        return set()
+    drop = {i for i, r in enumerate(tab)
+            if (r["animal"], r["ident"], r["wording"]) in bad}
+    print(f"skipping {len(drop)} rows")
+    return drop
+
+
 def main(field="question", base="results", analyzers=tuple(ANALYZERS), C=1.0):
     out_dir = data.run_dir(base)
-    (out_dir / "config.json").write_text(json.dumps(
-        dict(script="text_baseline", field=field, analyzers=list(analyzers),
-             C=C, run_dir=str(data.RUN_DIR), seed=SEED), indent=2))
     print(f"-> {out_dir}")
 
     rows, tab = data.analysis_rows(data.build_table())
-    classes, y = np.unique([r["animal"] for r in tab], return_inverse=True)
-    uid = np.array([r["uid"] for r in tab])
+    classes = np.unique([r["animal"] for r in tab])
     txt = np.array([r[field] for r in tab], dtype=object)
 
     # An animal name inside its own prompt would make this trivially circular.
-    low = [t.lower() for t in txt]
-    leaks = [c for c in classes if any(c.lower() in t for t in low)]
-    assert not leaks, f"animal name appears in its own prompts: {leaks}"
+    leak_action = "none"
+    bad = find_leaks(classes, txt, tab)
+    if bad:
+        drop = resolve_leaks(bad, tab)
+        leak_action = "skip" if drop else "ignore"
+        if drop:
+            keep = np.array([i for i in range(len(tab)) if i not in drop])
+            rows, tab = rows[keep], [tab[i] for i in keep]
+            txt = txt[keep]
+            assert len(np.unique([r["animal"] for r in tab])) == len(classes), \
+                "skipping the leaking rows removed a whole class"
+
+    classes, y = np.unique([r["animal"] for r in tab], return_inverse=True)
+    uid = np.array([r["uid"] for r in tab])
+
+    (out_dir / "config.json").write_text(json.dumps(
+        dict(script="text_baseline", field=field, analyzers=list(analyzers),
+             C=C, run_dir=str(data.RUN_DIR), seed=SEED, n_rows=len(tab),
+             leaks=[list(k) for k in sorted(bad)], leak_action=leak_action), indent=2))
 
     conds = data.conditions(tab, seed=SEED)
     n_match = min(len(idx["train"]) for _, _, idx in conds)

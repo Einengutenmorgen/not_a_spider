@@ -104,17 +104,40 @@ def main(stride=1, clf="logreg", out="results.csv", only=None, features="all",
     jobs = ([("length", length)] if shard == 0 else []) + [(f, None) for f in feats]
 
     uid = np.array([r["uid"] for r in tab])
-    pf = open(out_dir / "predictions.csv", "w", newline="") if predictions else None
+
+    # Resume: a feature is done when every kept condition has a test row for it.
+    # Append whenever the file exists -- keying the mode on `done` would truncate a
+    # CSV that exists but has no completed feature for the conditions asked for.
+    csv_path = out_dir / out
+    fresh = not csv_path.exists()
+    done = set()
+    if not fresh:
+        with open(csv_path, newline="") as fh:
+            seen = [(r["feature"], r["condition"]) for r in csv.DictReader(fh)
+                    if r["split"] == "test"]
+        want = {c[0] for c in keep}
+        done = {f for f in {f for f, _ in seen}
+                if want <= {c for g, c in seen if g == f}}
+        jobs = [(f, X) for f, X in jobs if f not in done]
+        print(f"resuming in {out_dir}: {len(done)} features done, {len(jobs)} to go")
+        if not jobs:
+            print("nothing left to do")
+            return out_dir
+
+    pf = open(out_dir / "predictions.csv", "w" if fresh else "a",
+              newline="") if predictions else None
     if pf:
         pw = csv.writer(pf)
-        pw.writerow(["feature", "condition", "uid", "y_true", "y_pred"])
+        if fresh:
+            pw.writerow(["feature", "condition", "uid", "y_true", "y_pred"])
 
-    with open(out_dir / out, "w", newline="") as fh:
+    with open(csv_path, "w" if fresh else "a", newline="") as fh:
         w = csv.writer(fh)
-        w.writerow(["feature", "condition", "split", "n_train", "n_eval", "acc", "f1"])
+        if fresh:
+            w.writerow(["feature", "condition", "split", "n_train", "n_eval", "acc", "f1"])
         for fname, X in jobs:
             if X is None:
-                X = data.feature(fname, rows)
+                X = data.feature(fname, rows).astype(np.float32, copy=False)
                 model_of = lambda: build(clf, C=C, pca=min(pca, X.shape[1]) if pca else 0,
                                          n_classes=len(classes))
             else:
