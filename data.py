@@ -163,7 +163,7 @@ def check_split(tab, idx, axes, keyed=None):
         shared = set(k[a][idx["train"]]) & set(k[a][idx["test"]])
         assert not shared, f"{a}: {len(shared)} values shared train/test"
     assert not set(k["ident"][idx["train"]]) & set(k["ident"][idx["dev"]])
-    for part in ("train", "dev", "test"):
+    for part in ("train", "test"): #removed dev because it can be empty if n_dev=0
         assert len(idx[part]), f"{part} is empty"
 
 
@@ -177,7 +177,7 @@ def conditions(tab, n_frame_test=2, slot_groups=3, seed=0):
     wordings, so adding the axis there would change nothing."""
     rng = np.random.default_rng(seed)
     k = keyed = keys(tab)
-    id_test, id_dev = holdout_identifiers(tab, seed=seed)
+    id_test, id_dev = holdout_identifiers(tab, n_test=4, n_dev=0, seed=seed)
     w_test = holdout_wordings(tab, id_test, id_dev, seed=seed)
     frames = rng.permutation(sorted(set(k["frame"])))
     f_test = set(frames[:n_frame_test])
