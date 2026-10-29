@@ -14,3 +14,4 @@ results_pretest/
 results/001_Wed_07_48/config.json
 results/001_Wed_07_48/strict_h.csv
 positions.jsonl
+results_segments/*.csv

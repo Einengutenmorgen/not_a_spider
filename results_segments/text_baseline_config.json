@@ -1,0 +1,18 @@
+{
+  "script": "text_baseline",
+  "fields": [
+    "input",
+    "full"
+  ],
+  "analyzers": [
+    "word",
+    "char_wb"
+  ],
+  "C": 1.0,
+  "run_dir": "acts/20260919-140326-a1782c",
+  "seed": 0,
+  "n_rows": 233100,
+  "leaks": [],
+  "leak_action": "none",
+  "answer_leak_rate": 0.1176061776061776
+}
