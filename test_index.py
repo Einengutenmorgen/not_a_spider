@@ -2,7 +2,7 @@
 
     python3 test_index.py
 
-The ORIGINAL scripts (git HEAD: OLD_index_positions.py, index_tokens.py) and the new ones run on the same mock
+The ORIGINAL scripts (commit c696aba: OLD_index_positions.py, index_tokens.py) and the new ones run on the same mock
 Olmo-like tokenizer and the same synthetic cases; positions.jsonl and tokens.parquet must be identical. Then the
 Qwen-like template (thinking off: five header tokens) runs through the new scripts only.
 """
@@ -22,8 +22,11 @@ import models
 import regress
 from mocks import OLMO, QWEN, mock_tok, synthetic_index
 
+ORIGINAL = "c696aba"      # last commit before the adaptation: the Olmo-7B scripts as they ran
+
+
 def git_show(path, dest):
-    dest.write_text(subprocess.run(["git", "show", f"HEAD:{path}"], capture_output=True, text=True, check=True).stdout)
+    dest.write_text(subprocess.run(["git", "show", f"{ORIGINAL}:{path}"], capture_output=True, text=True, check=True).stdout)
 
 
 with tempfile.TemporaryDirectory() as d:

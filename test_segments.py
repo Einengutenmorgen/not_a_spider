@@ -1,7 +1,7 @@
 """Mock tests for run_segments.py (no GPU, no torch; run from the repo root):  python3 test_segments.py
 
 1. rows and conditions: canonical table = the Olmo-7B uids.npy; condition filter per model
-2. coordinates(): identical to the coordinate code of the ORIGINAL run_segments.py (git HEAD) for Olmo
+2. coordinates(): identical to the coordinate code of the ORIGINAL run_segments.py (commit c696aba) for Olmo
 3. coordinates() agree with the names of index_tokens.py (tokens.parquet) for the Olmo and the Qwen layout
 4. coordinate filters
 """
@@ -36,7 +36,7 @@ print("table: canonical order = uids.npy; qwen conditions", [c for c, _, _ in q_
 
 with tempfile.TemporaryDirectory() as d:
     d = Path(d)
-    orig = subprocess.run(["git", "show", "HEAD:run_segments.py"], capture_output=True, text=True, check=True).stdout.splitlines()
+    orig = subprocess.run(["git", "show", "c696aba:run_segments.py"], capture_output=True, text=True, check=True).stdout.splitlines()
     start = next(i for i, l in enumerate(orig) if l.startswith("ANCHORS = ["))
     end = next(i for i, l in enumerate(orig) if l.startswith("COORDS = list(T)"))
     orig_coord_code = "\n".join(orig[start:end + 1])
