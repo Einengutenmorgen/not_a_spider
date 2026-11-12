@@ -2,7 +2,7 @@
 
     python3 regress.py positions REF.jsonl NEW.jsonl    # every key of REF except shard/row, row by row, input_ids included
     python3 regress.py tokens REF.parquet NEW.parquet   # identical frames: values, columns, order
-    python3 regress.py preds REF.npz NEW.npz            # one coordinate's probe predictions (results_segments/preds)
+    python3 regress.py preds REF.npz NEW.npz [uids.npy]   # one coordinate's probe predictions (results_segments/preds): agreement + accuracy
     python3 regress.py rebuild positions.jsonl DIR      # DIR/index_0.jsonl from a positions.jsonl (index fields only)
 """
 import json
@@ -35,17 +35,23 @@ def tokens(ref, new):
     return True
 
 
-def preds(ref, new):
-    """Probe predictions of one coordinate: same test rows and token indices, agreement of the predicted classes."""
+def preds(ref, new, uids="results_segments/uids.npy"):
+    """Probe predictions of one coordinate: same test rows and token indices; per condition the agreement of the
+    predicted classes and the ACCURACY of both runs (labels from uids.npy), which is what the analysis uses."""
     import numpy as np
     a, b = np.load(ref, allow_pickle=True), np.load(new, allow_pickle=True)
-    ok = list(a["features"]) == list(b["features"])
+    y = np.searchsorted(a["classes"], [u.split("|")[0] for u in np.load(uids, allow_pickle=True)])
+    ok = list(a["features"]) == list(b["features"]) and list(a["classes"]) == list(b["classes"])
+    print(f"{'condition':10} {'agree':>7} {'acc ref':>8} {'acc new':>8} {'mean diff':>10} {'max |diff|':>11}   (means over {len(a['features'])} features)")
     for k in a.files:
         if k.endswith("_rows") or k.endswith("_t"):
             ok &= k in b.files and bool((a[k] == b[k]).all())
-        elif k.endswith("_pred"):
-            same = (a[k] == b[k]).mean(axis=1)                      # per feature
-            print(f"{k[:-5]:10} predictions identical: mean {same.mean():.4%}, worst feature {same.min():.4%}")
+    for k in a.files:
+        if k.endswith("_pred"):
+            c, rows = k[:-5], a[k[:-5] + "_rows"]
+            acc = [(p[k] == y[rows][None, :]).mean(1) for p in (a, b)]
+            d = acc[1] - acc[0]
+            print(f"{c:10} {(a[k] == b[k]).mean():7.2%} {acc[0].mean():8.4f} {acc[1].mean():8.4f} {d.mean():+10.4f} {abs(d).max():11.4f}")
     print("rows, t and features identical" if ok else "ROWS, T OR FEATURES DIFFER")
     return ok
 

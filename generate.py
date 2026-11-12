@@ -9,6 +9,7 @@ generated.jsonl (uid, answer, stop) is the resume file; `stop` = token that ende
 """
 import argparse
 import json
+import time
 from collections import Counter, defaultdict
 from dataclasses import asdict
 from pathlib import Path
@@ -38,6 +39,7 @@ def run(cs, gen_batch, gen_fn, part):
             done[r["uid"]] = r
     todo = [c for c in cs if c["uid"] not in done]
     print(f"{len(done)} cases already generated, {len(todo)} to do", flush=True)
+    t0 = time.time()
     with part.open("a") as fh:
         for n, b in enumerate(batches(todo, gen_batch), 1):
             assert len({c["n_tokens"] for c in b}) == 1
@@ -47,7 +49,9 @@ def run(cs, gen_batch, gen_fn, part):
                 fh.write(json.dumps(r) + "\n")
             fh.flush()
             if n % 50 == 0:
-                print(f"  {len(done)}/{len(cs)}", flush=True)
+                print(f"  {len(done)}/{len(cs)}  {time.time() - t0:.0f}s", flush=True)
+    if todo:
+        print(f"generated {len(todo)} cases in {time.time() - t0:.0f}s ({len(todo) / (time.time() - t0):.1f} cases/s)", flush=True)
     return done
 
 
@@ -130,9 +134,11 @@ if __name__ == "__main__":
         compare(cs, a.compare, "batched vs reference")
     if a.check_single:
         sub = cs[::max(1, len(cs) // a.check_single)][:a.check_single]
+        t0 = time.time()
         for c in sub:
             c["batched"] = c["answer"]
             c["answer"] = gen_fn([c])[0][0]
             c["correct"] = bool(C.score(animals, c))
         same = sum(c["answer"] == c["batched"] for c in sub)
-        print(f"single vs batched: {len(sub)} cases | identical answer {same / len(sub):.1%}")
+        print(f"single vs batched: {len(sub)} cases | identical answer {same / len(sub):.1%} | "
+              f"single-prompt speed {len(sub) / (time.time() - t0):.2f} cases/s")

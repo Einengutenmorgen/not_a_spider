@@ -342,6 +342,7 @@ def main():
                 checked = True
             extract(model, missing, S)
             model.to("cpu")                                          # free the GPU for probing
+            torch.cuda.empty_cache()                                 # give the weights' cached blocks back too
         t1 = time.time()
         for c in cs:
             probe(c, S)
